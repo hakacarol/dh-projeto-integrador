@@ -1,0 +1,70 @@
+CREATE DATABASE  IF NOT EXISTS `db_digitalbooking` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `db_digitalbooking`;
+-- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+--
+-- Host: pit1g1.cy6nd2qhdavj.sa-east-1.rds.amazonaws.com    Database: db_digitalbooking
+-- ------------------------------------------------------
+-- Server version	8.0.28
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
+
+--
+-- Table structure for table `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `end_date` date DEFAULT NULL,
+  `entry_time` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `user_account_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKgoouhtuwwm277879njd9atahw` (`product_id`),
+  KEY `FKis0l3525f611340hipyx191p6` (`user_account_id`),
+  CONSTRAINT `FKgoouhtuwwm277879njd9atahw` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  CONSTRAINT `FKis0l3525f611340hipyx191p6` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation`
+--
+
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (7,'2022-04-13','3','2022-04-05',15,NULL),(8,'2022-04-22','5','2022-04-14',4,NULL),(13,'2022-04-22','5','2022-04-14',7,NULL),(16,'2022-04-22','15','2022-04-13',11,NULL),(18,'2022-05-11','0','2022-05-03',20,NULL),(25,'2022-06-03','4','2022-05-26',13,NULL),(26,'2022-06-18','1','2022-06-08',13,NULL),(28,'2022-05-19','7','2022-05-12',4,NULL),(30,'2022-04-08','16','2022-04-07',6,NULL),(38,'2022-04-07','15','2022-04-06',8,NULL),(40,'2022-05-14','22','2022-05-12',27,NULL),(44,'2022-05-09','2','2022-05-06',24,NULL),(46,'2022-04-14','6','2022-04-05',5,NULL),(50,'2022-04-23','14','2022-04-17',2,1),(51,'2022-05-23','2','2022-05-20',27,NULL),(52,'2022-04-22','13','2022-04-20',26,NULL),(53,'2022-05-10','11','2022-05-04',10,36),(62,'2022-05-28','2','2022-05-26',18,25),(63,'2022-04-28','16','2022-04-20',24,24),(64,'2022-05-30','3','2022-05-28',5,25),(65,'2022-06-23','12','2022-06-16',20,25),(66,'2022-07-19','13','2022-07-13',20,41),(67,'2022-05-26','12','2022-05-24',19,2);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-04-20  8:30:47
