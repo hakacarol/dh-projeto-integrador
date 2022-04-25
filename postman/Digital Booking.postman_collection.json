@@ -1,0 +1,1424 @@
+{
+	"info": {
+		"_postman_id": "f13c93a4-17a0-40e9-8e35-d685ade116e3",
+		"name": "Digital Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Product POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Status ok\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.name).to.eql(requestBody.name);\r",
+									"  pm.expect(responseJson.description).to.eql(requestBody.description);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"product with image\",\r\n    \"description\": \"product with image\",\r\n    \"address\": \"rua das marmotas\",\r\n    \r\n    \"images\": [\r\n        {\r\n            \"title\": \"image with product\",\r\n            \"original\":\"image with product\",\r\n            \"thumbnail\": \"image with product\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product PUT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"PUT Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"PUT has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"PUT return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"PUT Product request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.name).to.eql(requestBody.name);\r",
+									"  pm.expect(responseJson.description).to.eql(requestBody.description);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Product 1 Edited\",\r\n    \"description\": \"description Product 1 Edited\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GET BY ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET By ID Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By ID has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By ID return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GET BY City Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET By City Name Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By City Name has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By City Name return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product/city/Curitiba",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"city",
+								"Curitiba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GET City and Dates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET By City and Dates Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By City and Dates has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By City and Dates return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product/city/Montevideo/Fri Apr 01 2022/Sat Apr 02 2022",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"city",
+								"Montevideo",
+								"Fri Apr 01 2022",
+								"Sat Apr 02 2022"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GET By Dates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET By Dates Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By Dates has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By Dates return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product/dates/Fri Apr 01 2022/Sat Apr 02 2022",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"dates",
+								"Fri Apr 01 2022",
+								"Sat Apr 02 2022"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GET BY Category Title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET By Category Title Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By Category Title has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By Category Title return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product/category/Hotel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"category",
+								"Hotel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GET ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product DELETE BY ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"DELETE By ID Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"DELETE By ID has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"DELETE By ID return Deleted\", function () {\r",
+									"     pm.response.to.have.body(\"Deleted\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Category POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Status ok\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.title).to.eql(requestBody.title);\r",
+									"  pm.expect(responseJson.description).to.eql(requestBody.description);\r",
+									"  pm.expect(responseJson.urlImage).to.eql(requestBody.urlImage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Category 1\",\r\n    \"description\": \"Description Category 1\",\r\n    \"urlImage\": \"public/images/img1.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category PUT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"PUT Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"PUT has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"PUT return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"PUT Category request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.title).to.eql(requestBody.title);\r",
+									"  pm.expect(responseJson.description).to.eql(requestBody.description);\r",
+									"  pm.expect(responseJson.urlImage).to.eql(requestBody.urlImage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Category 1 Edited\",\r\n    \"description\": \"Description Category 1 Edited\",\r\n    \"urlImage\": \"public/images/Editedimg1.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category GET BY ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET By ID Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By ID has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By ID return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category GET ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category DELETE BY ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"DELETE By ID Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"DELETE By ID has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"DELETE By ID return Deleted\", function () {\r",
+									"     pm.response.to.have.body(\"Deleted\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "City",
+			"item": [
+				{
+					"name": "City POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Status ok\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.name).to.eql(requestBody.name);\r",
+									"  pm.expect(responseJson.description).to.eql(requestBody.description);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"City 1\",\r\n    \"country\": \"Brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "City GET ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Status ok\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.name).to.eql(requestBody.name);\r",
+									"  pm.expect(responseJson.lastName).to.eql(requestBody.lastName);\r",
+									"  pm.expect(responseJson.email).to.eql(requestBody.email);\r",
+									"  pm.expect(responseJson.username).to.eql(requestBody.username);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\":\"Leonardo\",\r\n    \"lastName\": \"Santino\",\r\n    \"username\": \"leonardosantino\",\r\n    \"email\": \"leonardosantino@email.com\",\r\n    \"password\": \"leonardosantino\",\r\n    \"roles\": [\r\n        {\"id\": 2}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User GET BY ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET By ID Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By ID has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET By ID return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User GET ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservations",
+			"item": [
+				{
+					"name": "Reservation POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Status ok\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.startDate).to.eql(requestBody.startDate);\r",
+									"  pm.expect(responseJson.endDate).to.eql(requestBody.endDate);\r",
+									"  pm.expect(responseJson.entryTime).to.eql(requestBody.entryTime);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\":\"2022-03-28\",\r\n    \"endDate\": \"2022-03-29\",\r\n    \"userAccount\": {\"id\": 1},\r\n    \"product\": {\"id\": 1}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reservation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation GET By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\":\"2022/03/28\",\r\n    \"endDate\": \"2022/03/29\",\r\n    \"product\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reservation/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reservation",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation GET By  Product ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\":\"2022/03/28\",\r\n    \"endDate\": \"2022/03/29\",\r\n    \"product\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reservation/product/20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reservation",
+								"product",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation GET By  User ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\":\"2022/03/28\",\r\n    \"endDate\": \"2022/03/29\",\r\n    \"product\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reservation/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reservation",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "Role POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Status ok\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST request body is equal response json\", () => {\r",
+									"\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"  pm.expect(responseJson.name).to.eql(requestBody.name);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role GET By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/role/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"role",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role GET ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GET ALL Status ok\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GET ALL return JSON\", function () {\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate",
+			"item": [
+				{
+					"name": "Authenticate POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"POST Status ok\", function () {\r",
+									"     pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"POST has Body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"leonardosantino@email.com\",\r\n    \"password\": \"leonardosantino\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token_jwt",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
